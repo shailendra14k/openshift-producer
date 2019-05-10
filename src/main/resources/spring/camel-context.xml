@@ -5,7 +5,7 @@
     <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
         <propertyPlaceholder id="properties" location="ref:props"/>
         <route id="timer">
-           <from id="_from1" uri="timer://fooTest?fixedRate=true&amp;period=1000"/>
+           <from id="_from1" uri="timer://fooTest11?fixedRate=true&amp;period=1000"/>
             <setBody id="_setBody1">
                 <constant>Hello World !!!.</constant>
             </setBody>
