@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="ref:props"/>
+        <route id="timer">
+           <from id="_from1" uri="timer://foo?fixedRate=true&amp;period=1000"/>
+            <setBody id="_setBody1">
+                <constant>Hello World !!!.</constant>
+            </setBody>
+            <to  id="to1" uri="amq722:queue:shailendra"/>
+            <log id="_log2" message="SENT MESSAGE ${body}"/>
+        </route>
+    </camelContext>
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="amq722">
+        <property name="connectionFactory" ref="amq722PooledConnectionFactory"/>
+        <property name="cacheLevelName" value="CACHE_CONSUMER"/>
+    </bean>
+    <bean class="org.apache.activemq.pool.PooledConnectionFactory"
+        destroy-method="stop" id="amq722PooledConnectionFactory" init-method="start" primary="true">
+        <property name="maxConnections" value="11"/>
+        <property name="connectionFactory" ref="amq722ConnectionFactory"/>
+    </bean>
+    <bean class="org.apache.activemq.ActiveMQConnectionFactory" id="amq722ConnectionFactory">
+        <property name="brokerURL" value="${brokerURL}"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+</beans>
