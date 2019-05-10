@@ -19,7 +19,7 @@
     </bean>
     <bean class="org.apache.activemq.pool.PooledConnectionFactory"
         destroy-method="stop" id="amq722PooledConnectionFactory" init-method="start" primary="true">
-        <property name="maxConnections" value="11"/>
+        <property name="maxConnections" value="10"/>
         <property name="connectionFactory" ref="amq722ConnectionFactory"/>
     </bean>
     <bean class="org.apache.activemq.ActiveMQConnectionFactory" id="amq722ConnectionFactory">
