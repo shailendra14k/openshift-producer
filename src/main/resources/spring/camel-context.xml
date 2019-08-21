@@ -9,7 +9,7 @@
             <setBody id="_setBody1">
                 <constant>Hello World !!!.</constant>
             </setBody>
-            <to  id="to1" uri="amq722:queue:shailendra"/>
+            <to  id="to1" uri="amq722:topic:test"/>
             <log id="_log2" message="SENT MESSAGE ${body}"/>
         </route>
     </camelContext>
